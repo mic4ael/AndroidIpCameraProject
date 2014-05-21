@@ -4,5 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="dmcs.project.cameraapp.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame" >
+
+    <VideoView
+        android:id="@+id/videoViewId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
 
