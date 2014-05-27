@@ -45,8 +45,8 @@ public class MainActivity extends ActionBarActivity {
 			HttpResponse res = null;
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			httpClient.getCredentialsProvider().setCredentials(
-												new AuthScope("https://212.51.218.248/", AuthScope.ANY_PORT), 
-												new UsernamePasswordCredentials("root", "test.123"));
+					   new AuthScope("https://212.51.218.248/", AuthScope.ANY_PORT), 
+					   new UsernamePasswordCredentials("root", "test.123"));
 			
 			try {
 				res = httpClient.execute(new HttpGet(URI.create(url[0])));
