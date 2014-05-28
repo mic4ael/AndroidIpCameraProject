@@ -22,7 +22,7 @@ import dmcs.project.cameraapp.mjpeg.MJPegInputStream;
 import dmcs.project.cameraapp.mjpeg.MJPegView;
 
 public class MainActivity extends ActionBarActivity {
-	private static final String url = "http://212.51.218.248/video.cgi";
+	private static final String url = "http://212.51.218.248/still.jpg";
 	private MJPegView mv;
 	
 	@Override
@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
 			HttpResponse res = null;
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			httpClient.getCredentialsProvider().setCredentials(
-					   new AuthScope("https://212.51.218.248/", AuthScope.ANY_PORT), 
+					   new AuthScope("212.51.218.248", AuthScope.ANY_PORT), 
 					   new UsernamePasswordCredentials("root", "test.123"));
 			
 			try {
