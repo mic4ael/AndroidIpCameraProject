@@ -1,6 +1,9 @@
 package dmcs.project.cameraapp.mjpeg;
 
 import java.io.IOException;
+import java.net.URI;
+
+import org.apache.http.client.methods.HttpGet;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +17,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import dmcs.project.cameraapp.GlobalStore;
 
 public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 	public static final int POSITION_UPPER_LEFT = 9;
@@ -58,7 +62,7 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 			Rect destRect;
 			Canvas c = null;
 			Paint p = new Paint();
-			String fps;
+			String fps = null;
 			
 			while(mRun) {
 				if (surfaceDone) {
@@ -66,8 +70,10 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 						c = surfaceHolder.lockCanvas();
 						synchronized(surfaceHolder) {
 							try {
-								bm = mIn.readMjpegFrame();
-								destRect = destRect(bm.getWidth(), bm.getHeight());
+								bm = new MJPegInputStream(GlobalStore.httpClient.execute(
+														  new HttpGet(URI.create(GlobalStore.url))).getEntity().getContent())
+														  .readMjpegFrame();
+								destRect = destRect(dispWidth, dispHeight / 2);
 								c.drawColor(Color.BLACK);
 								c.drawBitmap(bm, null, destRect, p);
 								
@@ -88,8 +94,9 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 										ovl = makeFpsOverlay(overlayPaint, fps);
 									}
 								}
+								
 							} catch (IOException ex) {
-								Log.d(this.getClass().toString(), ex.toString());
+								continue;
 							}
 						}
 					} finally {

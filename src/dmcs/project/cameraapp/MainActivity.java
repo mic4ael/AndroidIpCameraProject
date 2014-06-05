@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +19,6 @@ import dmcs.project.cameraapp.mjpeg.MJPegInputStream;
 import dmcs.project.cameraapp.mjpeg.MJPegView;
 
 public class MainActivity extends ActionBarActivity {
-	private static final String url = "http://212.51.218.248/still.jpg";
 	private MJPegView mv;
 	
 	@Override
@@ -35,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 		mv = new MJPegView(this);
 		setContentView(mv);
 		
-		new DoRead().execute(url);
+		new DoRead().execute(GlobalStore.url);
 	}
 	
 	public class DoRead extends AsyncTask<String, Void, MJPegInputStream> {
@@ -43,13 +39,9 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		protected MJPegInputStream doInBackground(String... url) {
 			HttpResponse res = null;
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			httpClient.getCredentialsProvider().setCredentials(
-					   new AuthScope("212.51.218.248", AuthScope.ANY_PORT), 
-					   new UsernamePasswordCredentials("root", "test.123"));
 			
 			try {
-				res = httpClient.execute(new HttpGet(URI.create(url[0])));
+				res = GlobalStore.httpClient.execute(new HttpGet(URI.create(url[0])));
 				if (res.getStatusLine().getStatusCode() == 401) {
 					return null;
 				}
@@ -66,9 +58,9 @@ public class MainActivity extends ActionBarActivity {
 		
 		@Override
 		protected void onPostExecute(MJPegInputStream result) {
-			mv.setSource(result);
 			mv.setDispMode(MJPegView.SIZE_BEST_FIT);
 			mv.setShowFps(true);
+			mv.setSource(result);
 		}
 		
 	}
