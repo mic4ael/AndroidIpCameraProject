@@ -3,6 +3,7 @@ package dmcs.project.cameraapp.mjpeg;
 import java.io.IOException;
 import java.net.URI;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
 import android.content.Context;
@@ -63,6 +64,7 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 			Canvas c = null;
 			Paint p = new Paint();
 			String fps = null;
+			HttpResponse res = null;
 			
 			while(mRun) {
 				if (surfaceDone) {
@@ -70,8 +72,9 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 						c = surfaceHolder.lockCanvas();
 						synchronized(surfaceHolder) {
 							try {
-								bm = new MJPegInputStream(GlobalStore.httpClient.execute(
-														  new HttpGet(URI.create(GlobalStore.url))).getEntity().getContent())
+								res = GlobalStore.getHttpClient().execute(
+										  new HttpGet(URI.create(GlobalStore.url)));
+								bm = new MJPegInputStream(res.getEntity().getContent())
 														  .readMjpegFrame();
 								destRect = destRect(dispWidth, dispHeight / 2);
 								c.drawColor(Color.BLACK);
@@ -100,6 +103,11 @@ public class MJPegView extends SurfaceView implements SurfaceHolder.Callback {
 							}
 						}
 					} finally {
+						try {
+							res.getEntity().consumeContent();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						if (c != null)
 							surfaceHolder.unlockCanvasAndPost(c);
 					}

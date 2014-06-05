@@ -6,12 +6,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 public abstract class GlobalStore {
 	public static final String url = "http://212.51.218.248/still.jpg";
-	public static final DefaultHttpClient httpClient;
+	private static DefaultHttpClient httpClient;
 	
-	static {
-		httpClient = new DefaultHttpClient();
-		httpClient.getCredentialsProvider().setCredentials(
-				   new AuthScope("212.51.218.248", AuthScope.ANY_PORT), 
-				   new UsernamePasswordCredentials("root", "test.123"));
+	public static DefaultHttpClient getHttpClient() {
+		if (httpClient == null) {
+			httpClient = new DefaultHttpClient();
+			httpClient.getCredentialsProvider().setCredentials(
+					new AuthScope("212.51.218.248", AuthScope.ANY_PORT), 
+					new UsernamePasswordCredentials("root", "test.123"));
+		}
+		
+		return httpClient;
 	}
 }

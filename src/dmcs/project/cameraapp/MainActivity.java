@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
 			HttpResponse res = null;
 			
 			try {
-				res = GlobalStore.httpClient.execute(new HttpGet(URI.create(url[0])));
+				res = GlobalStore.getHttpClient().execute(new HttpGet(URI.create(url[0])));
 				if (res.getStatusLine().getStatusCode() == 401) {
 					return null;
 				}
