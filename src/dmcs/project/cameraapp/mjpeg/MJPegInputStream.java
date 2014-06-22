@@ -9,7 +9,6 @@ import java.util.Properties;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class MJPegInputStream extends DataInputStream {
 	private final byte[] SOI_MARKER = {(byte) 0xFF, (byte)0xD8 };
