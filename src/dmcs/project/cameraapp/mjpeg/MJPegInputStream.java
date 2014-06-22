@@ -64,7 +64,6 @@ public class MJPegInputStream extends DataInputStream {
 		try {
 			mContentLength = parseContentLength(header);
 		} catch (NumberFormatException ex) {
-			Log.d("MJPegInputStream", "numberformatException");
 			mContentLength = getEndOfSequence(this, EOF_MARKER);
 		}
 		

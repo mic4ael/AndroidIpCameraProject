@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Address: " />
+
+    <EditText
+        android:id="@+id/input_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="http://212.51.218.248/still.jpg"
+        android:inputType="text"
+        android:layout_below="@+id/address"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_address"
+        android:layout_centerHorizontal="true"
+        android:text="User name: " />
+    
+    <EditText
+        android:id="@+id/input_user_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="root"
+        android:inputType="text"
+        android:layout_below="@+id/user_name"/>
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_user_name"
+        android:layout_centerHorizontal="true"
+        android:text="Password: " />
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:layout_below="@+id/password"/>
+    
+    <CheckBox 
+        android:id="@+id/save_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_below="@+id/input_password"/>
+    
+    <Button
+        android:id="@+id/dialogButtonOK"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/save_checkbox"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Connect" />
+
+</RelativeLayout>

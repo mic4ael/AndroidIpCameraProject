@@ -4,9 +4,26 @@
     tools:context="dmcs.project.cameraapp.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_stop"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Stop Playback"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_start"
+        android:orderInCategory="100"
+        android:title="Start Playback"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/action_gallery"
+        android:orderInCategory="100"
+        android:title="Show Screencast gallery"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="Exit"
         app:showAsAction="never"/>
 
 </menu>
